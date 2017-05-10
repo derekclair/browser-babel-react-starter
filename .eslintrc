@@ -70,6 +70,7 @@
 			}
 		],
 		"no-multiple-empty-lines": "off",
+		"no-plusplus": 0,
 		"no-tabs": 0,
 		"no-unused-vars": [
 			"warn",

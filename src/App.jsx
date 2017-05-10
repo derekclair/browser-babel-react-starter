@@ -1,5 +1,8 @@
 
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
+
+import Stringify from './Stringify.jsx';
 
 const Text = () => (
 	<p style={{ textAlign: 'center' }}>
@@ -16,10 +19,14 @@ const style = {
 };
 
 class App extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+
+		// this.store = this.props.store;
+		this.store = props.store;
 
 		this.onClick = this.incrementCount.bind(this);
+
 		this.state = { count: 0 };
 	}
 
@@ -29,8 +36,25 @@ class App extends Component {
 				<h1>Hello world!</h1>
 				<Text />
 				<div style={style}>
-					<span>{this.state.count}</span>
+					<span>this.state: {this.state.count}</span>
 					<input type="button" onClick={this.onClick} value="Click Me" />
+					<div>
+						<Stringify {...this.state} />
+					</div>
+				</div>
+				<div style={style}>
+					<span>this.store: {this.store.count}</span>
+					<input type="button" onClick={this.store.increment} value="Click Me" />
+					<div>
+						<Stringify {...this.store} />
+					</div>
+				</div>
+				<div style={style}>
+					<span>this.props.store: {this.props.store.count}</span>
+					<input type="button" onClick={this.props.store.increment} value="Click Me" />
+					<div>
+						<Stringify {...this.props} />
+					</div>
 				</div>
 			</div>
 		);
@@ -42,3 +66,4 @@ class App extends Component {
 }
 
 export default App;
+// export default observer(App);
